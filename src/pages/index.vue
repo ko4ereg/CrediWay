@@ -26,11 +26,11 @@
       <div class="main-page_greeting">
         <div class="title">Получай кешбеки за оплату сервисов в интернете</div>
         <div class="text">
-          Совершаешь покупку с Wildberries/Ozon на 10,000 рублей, делишься своим
-          мнением о товаре - и магазин благодарит тебя бонусами на 100 рублей. А
-          дальше ещё интереснее: эти бонусы моментально превратились в
-          подарочный сертификат! Просто покупай, делись впечатлениями и получай
-          приятные бонусы!
+          Совершаешь покупку с <span>Wildberries/Ozon</span> на 10,000 рублей,
+          делишься своим мнением о товаре - и магазин благодарит тебя бонусами
+          на 100 рублей. А дальше ещё интереснее: эти бонусы моментально
+          превратились в подарочный сертификат! Просто покупай, делись
+          впечатлениями и получай приятные бонусы!
         </div>
       </div>
     </div>
@@ -61,6 +61,34 @@
   }
   .main-page_greeting {
     padding: 55px 0 0 62px;
+    display: flex;
+    flex-direction: column;
+    gap: 57px;
+    align-items: start;
+    .title {
+      color: #2f2f2f;
+
+      /* Heading/48PX SemiBold */
+      font-family: "Inter";
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 60px; /* 125% */
+      letter-spacing: 1.92px;
+    }
+
+    .text {
+      width: 60%;
+      color: #8a8a8a;
+      font-family: "Roboto";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 171%; /* 34.2px */
+      span {
+        font-weight: 700;
+      }
+    }
   }
 }
 </style>
