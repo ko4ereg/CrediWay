@@ -8,9 +8,15 @@ import Logo from "./Logo.vue";
       <div class="d-flex align-end header">
         <RouterLink to="/"> <Logo /> </RouterLink>
         <div class="links">
-          <RouterLink> <div class="link">Главная</div></RouterLink>
-          <RouterLink> <div class="link">О нас</div></RouterLink>
-          <RouterLink> <div class="link">Вход / Регистрация</div></RouterLink>
+          <RouterLink to="/" active-class="active">
+            <div class="link">Главная</div></RouterLink
+          >
+          <RouterLink to="/about" active-class="active">
+            <div class="link">О нас</div></RouterLink
+          >
+          <RouterLink to="/signin" active-class="active">
+            <div class="link">Вход / Регистрация</div></RouterLink
+          >
         </div>
       </div>
     </div>
@@ -33,6 +39,21 @@ import Logo from "./Logo.vue";
     gap: 54px;
     .link {
       @include textLink;
+    }
+    .active {
+      .link {
+        &:before {
+          content: "";
+          position: absolute;
+          height: 1px;
+          bottom: 0;
+          left: 15%;
+          width: 75%;
+          transform: scale(1);
+          background: rgba(0, 0, 0, 0.5);
+          transition: transform 0.25s ease-out;
+        }
+      }
     }
   }
 }
