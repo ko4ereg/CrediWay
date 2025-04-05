@@ -1,51 +1,67 @@
 <script setup>
-//
+import { ref } from "vue";
+
+const form = ref(null);
+
+const onSubmit = () => {
+  if (!form.value) {
+    return false;
+  }
+};
 </script>
 
 <template>
   <v-card width="100%">
     <v-card-title>Дополните профиль</v-card-title>
     <v-card-text>
-      <div class="input">
-        <span>Имя</span>
-        <v-text-field
-          bg-color="#F5F5F5"
-          placeholder="Ваше имя"
-          variant="text"
-        ></v-text-field>
-      </div>
-      <div class="input">
-        <span>Почта</span>
-        <v-text-field
-          bg-color="#F5F5F5"
-          placeholder="Ваша электронная почта"
-          variant="text"
-        ></v-text-field>
-      </div>
-      <div class="input">
-        <span>Смена пароля</span>
-        <v-text-field
-          bg-color="#F5F5F5"
-          placeholder="Нынешний пароль"
-          variant="text"
-        ></v-text-field>
-        <v-text-field
-          bg-color="#F5F5F5"
-          placeholder="Новый пароль"
-          variant="text"
-        ></v-text-field>
-        <v-text-field
-          bg-color="#F5F5F5"
-          placeholder="Повтор нового пароля"
-          variant="text"
-        ></v-text-field>
-      </div>
-      <div class="buttons">
-        <v-btn size="x-large" style="color: #000" variant="text">Сбросить</v-btn>
-        <v-btn size="x-large" style="color: #fafafa" color="#D5A57D"
-          >Сохранить изменения</v-btn
-        >
-      </div>
+      <v-form v-model="form" @submit.prevent="onSubmit">
+        <div class="input">
+          <span>Имя</span>
+          <v-text-field
+            bg-color="#F5F5F5"
+            placeholder="Ваше имя"
+            variant="text"
+          ></v-text-field>
+        </div>
+        <div class="input">
+          <span>Почта</span>
+          <v-text-field
+            bg-color="#F5F5F5"
+            placeholder="Ваша электронная почта"
+            variant="text"
+          ></v-text-field>
+        </div>
+        <div class="input">
+          <span>Смена пароля</span>
+          <v-text-field
+            bg-color="#F5F5F5"
+            placeholder="Нынешний пароль"
+            variant="text"
+          ></v-text-field>
+          <v-text-field
+            bg-color="#F5F5F5"
+            placeholder="Новый пароль"
+            variant="text"
+          ></v-text-field>
+          <v-text-field
+            bg-color="#F5F5F5"
+            placeholder="Повтор нового пароля"
+            variant="text"
+          ></v-text-field>
+        </div>
+        <div class="buttons">
+          <v-btn size="x-large" style="color: #000" variant="text"
+            >Сбросить</v-btn
+          >
+          <v-btn
+            type="submit"
+            size="x-large"
+            style="color: #fafafa"
+            color="#D5A57D"
+            >Сохранить изменения</v-btn
+          >
+        </div>
+      </v-form>
     </v-card-text>
   </v-card>
 </template>

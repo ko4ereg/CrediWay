@@ -1,9 +1,17 @@
 <script setup>
+import { useDisplay } from "vuetify";
 import Logo from "./Logo.vue";
+const { width } = useDisplay();
 </script>
 
 <template>
-  <v-app-bar absolute app height="142" location="top" elevation="0">
+  <v-app-bar
+    absolute
+    app
+    :height="width < 768 ? 64 : 142"
+    location="top"
+    elevation="0"
+  >
     <div class="main-container">
       <div class="d-flex align-end header">
         <RouterLink to="/"> <Logo /> </RouterLink>
@@ -14,7 +22,7 @@ import Logo from "./Logo.vue";
           <RouterLink to="/about" active-class="active">
             <div class="link">О нас</div></RouterLink
           >
-          <RouterLink to="/signin" active-class="active">
+          <RouterLink to="/signup" active-class="active">
             <div class="link">Вход / Регистрация</div></RouterLink
           >
         </div>
@@ -27,9 +35,6 @@ import Logo from "./Logo.vue";
 .v-app-bar {
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   height: auto;
-  :deep(.v-toolbar__content) {
-    height: auto !important;
-  }
 }
 .header {
   gap: 10%;
@@ -54,6 +59,27 @@ import Logo from "./Logo.vue";
           transition: transform 0.25s ease-out;
         }
       }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    gap: 15px;
+    padding: 0px 0 0px;
+    .links {
+      display: inline-flex;
+      gap: 15px;
+    }
+  }
+}
+@media (max-width: 393px) {
+  .header {
+    gap: 10px;
+    padding: 0px 0 0px;
+    .links {
+      display: inline-flex;
+      gap: 5px;
     }
   }
 }

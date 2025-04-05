@@ -7,7 +7,9 @@ import { RouterView } from "vue-router";
 <template>
   <div class="main-container">
     <div class="lk-header d-flex align-center justify-space-between">
-      <div class="breadcrumbs"><span>Главная /</span> ЛК</div>
+      <div class="breadcrumbs">
+        <RouterLink to="/"> <span>Главная</span></RouterLink> <span>/</span> ЛК
+      </div>
 
       <div class="greeting">Добрый день! {{ name || "Безымянный" }}</div>
     </div>

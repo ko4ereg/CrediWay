@@ -48,3 +48,9 @@ a:visited {
   width: 100%;
   padding: 0 10%;
 }
+
+@media (max-width: 1023px) {
+  .main-container {
+    padding: 0 3%;
+  }
+}

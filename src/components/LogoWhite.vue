@@ -1,6 +1,6 @@
 <script setup></script>
 <template>
-  <div class="d-flex align-end">
+  <div class="d-flex align-end" style="transform: rotate(-6deg)">
     <span>CrediWay.online</span>
 
     <svg
@@ -432,23 +432,11 @@
 <style lang="scss" scoped>
 span {
   font-family: "Jersey 15";
+
   font-size: 26.909px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  background: linear-gradient(90deg, #b28f3b 0%, #9b5044 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-@media (max-width: 1023px) {
-  span {
-    font-size: 1rem;
-  }
-  svg {
-    height: 2em;
-    width: 2rem;
-  }
+  color: #fff;
 }
 </style>

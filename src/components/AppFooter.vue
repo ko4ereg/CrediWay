@@ -2,7 +2,7 @@
   <v-footer>
     <div class="main-container">
       <div class="main-footer">
-        <div class="column align-center flex-row">
+        <div class="d-flex column align-center flex-row">
           <Logo />
         </div>
         <div class="column">
@@ -25,7 +25,7 @@
           <div class="column-title">Аккаунт</div>
           <div class="column-items">
             <div class="column-item">
-              <RouterLink>
+              <RouterLink to="/signup">
                 <div class="link">Вход / Регистрация</div></RouterLink
               >
             </div>
@@ -92,6 +92,7 @@
 <script setup></script>
 <style lang="scss" scoped>
 footer {
+  flex: 0 0 auto;
   padding: 0;
   background-color: #000;
   .main-footer {
@@ -142,6 +143,112 @@ footer {
     line-height: 24px; /* 150% */
     svg {
       margin-right: 10px;
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  footer {
+    .main-footer {
+      padding: 60px 0 40px;
+
+      .column {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 20px;
+        color: #fafafa;
+        .column-title {
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 28px; /* 140% */
+        }
+        .column-items {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+
+          .column-item {
+            font-size: 0.8rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px; /* 150% */
+            .link {
+              @include textLinkWhite;
+            }
+          }
+        }
+      }
+    }
+    .little-footer {
+      padding: 16px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px; /* 150% */
+      svg {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+@media (max-width: 767px) {
+  footer {
+    .main-footer {
+      padding: 60px 0 40px;
+      flex-direction: column;
+      gap: 20px;
+      .column {
+        display: flex;
+
+        align-items: flex-start;
+        gap: 10px;
+        color: #fafafa;
+        .column-title {
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 28px; /* 140% */
+        }
+        .column-items {
+          flex: 1 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+
+          .column-item {
+            font-size: 0.8rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px; /* 150% */
+            .link {
+              @include textLinkWhite;
+            }
+          }
+        }
+      }
+    }
+    .little-footer {
+      padding: 16px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px; /* 150% */
+      svg {
+        margin-right: 10px;
+      }
     }
   }
 }

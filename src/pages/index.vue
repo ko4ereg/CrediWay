@@ -91,4 +91,76 @@
     }
   }
 }
+
+@media (max-width: 1439px) {
+  .main-container {
+    height: 70dvh;
+  }
+
+  .main-page {
+    .main-page_sidebar {
+      .main-page_links {
+        .main-page_link {
+          font-size: 1rem;
+        }
+      }
+    }
+    .main-page_greeting {
+      padding: 55px 0 0 62px;
+      display: flex;
+      flex-direction: column;
+      gap: 57px;
+      align-items: start;
+      .title {
+        font-size: 2rem;
+        line-height: 40px; /* 125% */
+        letter-spacing: 1.22px;
+      }
+
+      .text {
+        width: 100%;
+        font-size: 1rem;
+        span {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .main-container {
+    height: auto;
+    padding-bottom: 20px;
+  }
+  .main-page {
+    flex-direction: column;
+    .main-page_sidebar {
+      border-right: none;
+      order: 2;
+      .main-page_links {
+        .main-page_link {
+          font-size: 1rem;
+        }
+      }
+    }
+    .main-page_greeting {
+      padding: 15px 0 0 0px;
+
+      .title {
+        font-size: 2rem;
+        line-height: 40px; /* 125% */
+        letter-spacing: 1.22px;
+      }
+
+      .text {
+        width: 100%;
+        font-size: 1rem;
+        span {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
 </style>
