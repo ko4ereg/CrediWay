@@ -1,4 +1,5 @@
 <script setup>
+import { required } from "@/utils/validator";
 import { ref } from "vue";
 
 const form = ref(null);
@@ -46,6 +47,12 @@ const submitRecovery = () => {
   recoverySuccess.value = true;
   snackbar.value = true;
 };
+
+const passwordsMatch = (value) => {
+  return !!value === password.value || "Пароли не совпадают";
+};
+
+const loading = ref(false);
 </script>
 
 <template>
@@ -61,10 +68,13 @@ const submitRecovery = () => {
           v-if="!submitSMSSuccess"
           class="w-100"
           v-model="form"
+          validate-on="submit"
           @submit.prevent="onSubmit"
         >
           <v-text-field
+            validate-on="lazy input"
             v-model="phone"
+            :rules="[required]"
             bg-color="transparent"
             placeholder="Номер телефона"
             variant="underlined"
@@ -79,6 +89,7 @@ const submitRecovery = () => {
 
           <div class="buttons">
             <v-btn
+              :loading="loading"
               v-if="!submitPhoneSuccess"
               type="submit"
               size="x-large"
@@ -91,6 +102,7 @@ const submitRecovery = () => {
               {{ time }}</span
             >
             <v-btn
+              :loading="loading"
               v-if="submitPhoneSuccess"
               type="submit"
               :disabled="time > 0"
@@ -100,6 +112,8 @@ const submitRecovery = () => {
               >Прислать проверочный код повторно</v-btn
             >
             <v-btn
+              :loading="loading"
+              :disabled="!smsCode"
               v-if="submitPhoneSuccess"
               @click="submitSMS"
               type="submit"
@@ -117,12 +131,14 @@ const submitRecovery = () => {
           @submit.prevent="submitRecovery"
         >
           <v-text-field
+            :rules="[required]"
             v-model="password"
             bg-color="transparent"
             placeholder="Новый пароль"
             variant="underlined"
           ></v-text-field>
           <v-text-field
+            :rules="[passwordsMatch]"
             v-model="passwordRepeat"
             bg-color="transparent"
             placeholder="Повтор пароля"
@@ -131,6 +147,7 @@ const submitRecovery = () => {
 
           <div class="buttons">
             <v-btn
+              :loading="loading"
               :disabled="recoverySuccess"
               type="submit"
               size="x-large"
@@ -226,6 +243,44 @@ const submitRecovery = () => {
       @include textLink;
       font-weight: 500;
       width: fit-content;
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .container {
+    height: 80dvh;
+  }
+  .sideimage {
+    border-radius: 0px 4px 4px 0px;
+    position: absolute;
+    left: -55%;
+    height: 706px;
+    width: 100%;
+    background: #cbe4e8 url("@/assets/authBack.jpg") 190% bottom / 80% no-repeat;
+  }
+}
+@media (max-width: 767px) {
+  .container {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  .sideimage {
+    display: none;
+  }
+
+  .v-form {
+    height: 420px;
+  }
+  .form {
+    padding-bottom: 100px;
+    width: 100%;
+
+    .buttons {
+      margin-top: 10px;
+    }
+    .agrees {
+      margin-top: 0px;
     }
   }
 }

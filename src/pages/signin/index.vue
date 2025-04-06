@@ -1,4 +1,5 @@
 <script setup>
+import { required } from "@/utils/validator";
 import { ref } from "vue";
 
 const form = ref(null);
@@ -7,7 +8,15 @@ const onSubmit = () => {
   if (!form.value) {
     return false;
   }
+  loading.value = true;
+  //функция входа
+  loading.value = false;
 };
+
+const password = ref("");
+const phone = ref("");
+
+const loading = ref(false);
 </script>
 
 <template>
@@ -19,14 +28,25 @@ const onSubmit = () => {
           <div class="title">Вход в аккаунт</div>
           <div class="subtitle">Введите данные ниже</div>
         </div>
-        <v-form class="w-100" v-model="form" @submit.prevent="onSubmit">
+        <v-form
+          validate-on="submit"
+          class="w-100"
+          v-model="form"
+          @submit.prevent="onSubmit"
+        >
           <v-text-field
+            validate-on="lazy input"
+            :rules="[required]"
+            v-model="phone"
             bg-color="transparent"
             placeholder="Номер телефона"
             variant="underlined"
           ></v-text-field>
 
           <v-text-field
+            validate-on="lazy input"
+            :rules="[required]"
+            v-model="password"
             bg-color="transparent"
             placeholder="Пароль"
             variant="underlined"
@@ -34,6 +54,7 @@ const onSubmit = () => {
 
           <div class="buttons">
             <v-btn
+              :loading="loading"
               type="submit"
               size="x-large"
               style="color: #fafafa"
@@ -138,6 +159,44 @@ const onSubmit = () => {
           background: red;
         }
       }
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .container {
+    height: 80dvh;
+  }
+  .sideimage {
+    border-radius: 0px 4px 4px 0px;
+    position: absolute;
+    left: -55%;
+    height: 706px;
+    width: 100%;
+    background: #cbe4e8 url("@/assets/authBack.jpg") 190% bottom / 80% no-repeat;
+  }
+}
+@media (max-width: 767px) {
+  .container {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  .sideimage {
+    display: none;
+  }
+
+  .v-form {
+    height: 420px;
+  }
+  .form {
+    padding-bottom: 100px;
+    width: 100%;
+
+    .buttons {
+      margin-top: 10px;
+    }
+    .agrees {
+      margin-top: 0px;
     }
   }
 }

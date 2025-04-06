@@ -73,4 +73,41 @@ import { RouterView } from "vue-router";
     color: #b49479;
   }
 }
+
+@media (max-width: 1419px) {
+  .main-container {
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .main-container {
+    padding: 40px 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .main-container {
+    padding: 10px 20px;
+
+    flex-direction: column;
+    gap: 20px;
+  }
+  .lk-header {
+    @include innerHeader;
+    padding: 10px 0px;
+  }
+
+  .lk-main {
+    gap: 20px;
+    flex-direction: column;
+    .lk-content {
+      width: 100%;
+    }
+    .sidebar {
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+}
 </style>

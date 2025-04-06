@@ -1,4 +1,5 @@
 <script setup>
+import { required } from "@/utils/validator";
 import { ref } from "vue";
 import { useDisplay } from "vuetify";
 
@@ -11,21 +12,44 @@ const passwordRepeat = ref("");
 const smsCode = ref("");
 const snackbar = ref(false);
 const error = ref(false);
-
+const errorMessage = ref("");
 const submitSignUp = ref(false);
 const submitSms = ref(false);
 const onSubmit = () => {
-  if (!form.value) {
+  if (!phone.value || !password.value || !passwordRepeat.value) {
+    error.value = true;
+    errorMessage.value = "Заполните все поля";
     return;
   }
+
+  if (password.value !== passwordRepeat.value) {
+    error.value = true;
+    errorMessage.value = "Пароли не совпадают";
+    return;
+  }
+  if (phone.value.length < 10) {
+    error.value = true;
+    errorMessage.value = "Неверный номер телефона";
+    return;
+  }
+  loading.value = true;
   submitSignUp.value = true;
+  loading.value = false;
 };
 const smsSubmit = () => {
   if (!formSms.value) {
     return;
   }
+  loading.value = true;
   submitSms.value = true;
+  loading.value = false;
 };
+
+const passwordsMatch = (value) => {
+  return !!value === password.value || "Пароли не совпадают";
+};
+
+const loading = ref(false);
 </script>
 
 <template>
@@ -38,6 +62,7 @@ const smsSubmit = () => {
           <div class="subtitle">Введите данные ниже</div>
         </div>
         <v-form
+          validate-on="submit"
           style="height: 420px"
           v-if="!submitSignUp"
           class="w-100"
@@ -45,25 +70,35 @@ const smsSubmit = () => {
           @submit.prevent="onSubmit"
         >
           <v-text-field
+            validate-on="lazy input"
             bg-color="transparent"
             placeholder="Телефон"
             variant="underlined"
+            :rules="[required]"
+            v-model="phone"
           ></v-text-field>
 
           <v-text-field
+            validate-on="lazy input"
             bg-color="transparent"
             placeholder="Пароль"
+            :rules="[required]"
+            v-model="password"
             variant="underlined"
           ></v-text-field>
 
           <v-text-field
+            validate-on="lazy submit"
+            v-model="passwordRepeat"
             bg-color="transparent"
+            :rules="[passwordsMatch]"
             placeholder="Повтор пароля"
             variant="underlined"
           ></v-text-field>
 
           <div class="buttons">
             <v-btn
+              :loadin="loading"
               type="submit"
               size="x-large"
               style="color: #fafafa"
@@ -96,10 +131,12 @@ const smsSubmit = () => {
             bg-color="transparent"
             placeholder="SMS-код"
             variant="underlined"
+            v-model="smsCode"
           ></v-text-field>
 
           <div class="buttons">
             <v-btn
+              :loadin="loading"
               type="submit"
               size="x-large"
               style="color: #fafafa"
@@ -137,6 +174,16 @@ const smsSubmit = () => {
 
     <template v-slot:actions>
       <v-btn color="white" variant="text" @click="snackbar = false">
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+    </template>
+  </v-snackbar>
+
+  <v-snackbar timeout="3000" color="success" v-model="submitSms">
+    Аккаунт подтвержден, можете совершить вход
+
+    <template v-slot:actions>
+      <v-btn color="white" variant="text" @click="submitSms = false">
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </template>
@@ -253,6 +300,34 @@ const smsSubmit = () => {
           }
         }
       }
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .sideimage {
+    border-radius: 0px 4px 4px 0px;
+    position: absolute;
+    left: -55%;
+    height: 706px;
+    width: 100%;
+    background: #cbe4e8 url("@/assets/authBack.jpg") 190% bottom / 80% no-repeat;
+  }
+}
+@media (max-width: 767px) {
+  .container {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  .form {
+    padding-bottom: 100px;
+    width: 100%;
+
+    .buttons {
+      margin-top: 10px;
+    }
+    .agrees {
+      margin-top: 0px;
     }
   }
 }

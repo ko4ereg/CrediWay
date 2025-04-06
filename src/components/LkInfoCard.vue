@@ -1,4 +1,5 @@
 <script setup>
+import { required } from "@/utils/validator";
 import { ref } from "vue";
 
 const form = ref(null);
@@ -8,13 +9,21 @@ const onSubmit = () => {
     return false;
   }
 };
+
+const currentPassword = ref("");
+const newPassword = ref("");
+const repeatNewPassword = ref("");
+
+const passwordsMatch = (value) => {
+  return !!value === newPassword.value || "Пароли не совпадают";
+};
 </script>
 
 <template>
   <v-card width="100%">
     <v-card-title>Дополните профиль</v-card-title>
     <v-card-text>
-      <v-form v-model="form" @submit.prevent="onSubmit">
+      <v-form validate-on="submit" v-model="form" @submit.prevent="onSubmit">
         <div class="input">
           <span>Имя</span>
           <v-text-field
@@ -34,17 +43,26 @@ const onSubmit = () => {
         <div class="input">
           <span>Смена пароля</span>
           <v-text-field
+            :v-model="currentPassword"
             bg-color="#F5F5F5"
+            :rules="[required]"
             placeholder="Нынешний пароль"
+            validate-on="lazy input"
             variant="text"
           ></v-text-field>
           <v-text-field
+            :v-model="newPassword"
+            validate-on="lazy input"
+            :rules="[required]"
             bg-color="#F5F5F5"
             placeholder="Новый пароль"
             variant="text"
           ></v-text-field>
           <v-text-field
+            validate-on="lazy submit"
+            :v-model="repeatNewPassword"
             bg-color="#F5F5F5"
+            :rules="[passwordsMatch]"
             placeholder="Повтор нового пароля"
             variant="text"
           ></v-text-field>
@@ -111,6 +129,19 @@ const onSubmit = () => {
     font-style: normal;
     font-weight: 400;
     line-height: 24px; /* 150% */
+  }
+}
+
+@media (max-width: 767px) {
+  .v-card {
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .buttons {
+    flex-direction: column;
   }
 }
 </style>

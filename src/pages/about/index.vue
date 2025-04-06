@@ -414,22 +414,6 @@
           }
           .text {
             color: white;
-            .count {
-              font-family: "Inter";
-              font-size: 32px;
-              font-style: normal;
-              font-weight: 700;
-              line-height: 30px; /* 93.75% */
-              letter-spacing: 1.28px;
-            }
-
-            .text-text {
-              text-align: center;
-              font-size: 16px;
-              font-style: normal;
-              font-weight: 400;
-              line-height: 24px; /* 150% */
-            }
           }
         }
       }
@@ -469,22 +453,6 @@
           }
           .text {
             color: white;
-            .count {
-              font-family: "Inter";
-              font-size: 32px;
-              font-style: normal;
-              font-weight: 700;
-              line-height: 30px; /* 93.75% */
-              letter-spacing: 1.28px;
-            }
-
-            .text-text {
-              text-align: center;
-              font-size: 16px;
-              font-style: normal;
-              font-weight: 400;
-              line-height: 24px; /* 150% */
-            }
           }
         }
       }
@@ -542,5 +510,87 @@
 .about-header {
   @include innerHeader;
   padding-bottom: 42px;
+}
+
+@media (max-width: 1023px) {
+  .lk-main {
+    gap: 1%;
+    flex-direction: column;
+    .text-block {
+      order: 2;
+
+      padding-top: 0px;
+    }
+    .pic-block {
+      width: 100%;
+
+      order: 1;
+      .pic {
+        height: 300px;
+
+        border-radius: 4px 4px 4px 4px;
+        right: 0%;
+      }
+    }
+  }
+}
+@media (max-width: 767px) {
+  .main-container {
+    padding: 0 20px;
+
+    .cards {
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+      .card {
+        padding: 5px 10px 5px 10px;
+        gap: 5px;
+
+        .text {
+          .count {
+            font-family: "Inter";
+            font-size: 1.5rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 30px; /* 93.75% */
+            letter-spacing: 1.28px;
+          }
+
+          .text-text {
+            text-align: center;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px; /* 150% */
+          }
+        }
+      }
+    }
+  }
+  .lk-main {
+    .text-block {
+      .text-title {
+        font-size: 2rem;
+
+        letter-spacing: 1.24px;
+      }
+
+      .text-text {
+        text-align: justify;
+      }
+    }
+    .pic-block {
+      .pic {
+        .logo {
+          left: 15%;
+          scale: (0.7);
+        }
+      }
+    }
+  }
+  .about-header {
+    @include innerHeader;
+    padding-bottom: 42px;
+  }
 }
 </style>
