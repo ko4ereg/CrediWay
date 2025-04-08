@@ -10,7 +10,7 @@ const phone = ref("");
 const password = ref("");
 const passwordRepeat = ref("");
 const smsCode = ref("");
-const snackbar = ref(false);
+
 const error = ref(false);
 const errorMessage = ref("");
 const submitSignUp = ref(false);
@@ -47,12 +47,14 @@ const smsSubmit = () => {
 };
 
 const passwordsMatch = (value) => {
-  return !!value === password.value || "Пароли не совпадают";
+  return value === password.value || "Пароли не совпадают";
 };
 
 const passwordRepeatField = ref(null);
 const resetValidation = async () => {
-  await passwordRepeatField.value.resetValidation();
+  if (passwordRepeatField.value) {
+    return passwordRepeatField.value.resetValidation();
+  }
 };
 const loading = ref(false);
 </script>
@@ -134,6 +136,7 @@ const loading = ref(false);
           </div>
 
           <v-text-field
+            :rules="[required]"
             bg-color="transparent"
             placeholder="SMS-код"
             variant="underlined"

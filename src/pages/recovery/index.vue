@@ -49,7 +49,14 @@ const submitRecovery = () => {
 };
 
 const passwordsMatch = (value) => {
-  return !!value === password.value || "Пароли не совпадают";
+  return value === password.value || "Пароли не совпадают";
+};
+
+const passwordRepeatField = ref(null);
+const resetValidation = async () => {
+  if (passwordRepeatField.value) {
+    return passwordRepeatField.value.resetValidation();
+  }
 };
 
 const loading = ref(false);
@@ -125,12 +132,14 @@ const loading = ref(false);
           </div>
         </v-form>
         <v-form
+          validate-on="submit"
           v-else
           class="w-100"
           v-model="formPass"
           @submit.prevent="submitRecovery"
         >
           <v-text-field
+            validate-on="lazy input"
             :rules="[required]"
             v-model="password"
             bg-color="transparent"
@@ -138,6 +147,8 @@ const loading = ref(false);
             variant="underlined"
           ></v-text-field>
           <v-text-field
+            ref="passwordRepeatField"
+            @update:focused="resetValidation"
             :rules="[required, passwordsMatch]"
             v-model="passwordRepeat"
             bg-color="transparent"

@@ -1,6 +1,6 @@
 <script setup>
 import { required } from "@/utils/validator";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 const form = ref(null);
 
@@ -8,14 +8,40 @@ const onSubmit = () => {
   if (!form.value) {
     return false;
   }
+
+  if (newPassword.value !== repeatNewPassword.value) {
+    return false;
+  }
 };
 
+const name = ref("");
+const originalName = ref("Безымянный");
+const email = ref("");
+const originalEmail = ref("test@test.com");
 const currentPassword = ref("");
 const newPassword = ref("");
 const repeatNewPassword = ref("");
-
+const passwordRepeatField = ref(null);
+const resetValidation = async () => {
+  if (passwordRepeatField.value) {
+    return passwordRepeatField.value.resetValidation();
+  }
+};
 const passwordsMatch = (value) => {
-  return !!value === newPassword.value || "Пароли не совпадают";
+  return value === newPassword.value || "Пароли не совпадают";
+};
+
+onMounted(() => {
+  name.value = originalName.value;
+  email.value = originalEmail.value;
+});
+
+const resetForm = () => {
+  name.value = originalName.value;
+  email.value = originalEmail.value;
+  currentPassword.value = "";
+  newPassword.value = "";
+  repeatNewPassword.value = "";
 };
 </script>
 
@@ -27,48 +53,55 @@ const passwordsMatch = (value) => {
         <div class="input">
           <span>Имя</span>
           <v-text-field
+            variant="solo"
             bg-color="#F5F5F5"
             placeholder="Ваше имя"
-            variant="text"
+            v-model="name"
           ></v-text-field>
         </div>
         <div class="input">
           <span>Почта</span>
           <v-text-field
+            variant="solo"
+            v-model="email"
             bg-color="#F5F5F5"
             placeholder="Ваша электронная почта"
-            variant="text"
           ></v-text-field>
         </div>
         <div class="input">
           <span>Смена пароля</span>
           <v-text-field
-            :v-model="currentPassword"
+            variant="solo"
+            v-model="currentPassword"
             bg-color="#F5F5F5"
             :rules="[required]"
             placeholder="Нынешний пароль"
             validate-on="lazy input"
-            variant="text"
           ></v-text-field>
           <v-text-field
-            :v-model="newPassword"
+            variant="solo"
+            v-model="newPassword"
             validate-on="lazy input"
             :rules="[required]"
             bg-color="#F5F5F5"
             placeholder="Новый пароль"
-            variant="text"
           ></v-text-field>
           <v-text-field
-            validate-on="lazy submit"
-            :v-model="repeatNewPassword"
+            ref="passwordRepeatField"
+            v-model="repeatNewPassword"
+            @update:focused="resetValidation"
             bg-color="#F5F5F5"
             :rules="[required, passwordsMatch]"
             placeholder="Повтор нового пароля"
-            variant="text"
+            variant="solo"
           ></v-text-field>
         </div>
         <div class="buttons">
-          <v-btn size="x-large" style="color: #000" variant="text"
+          <v-btn
+            @click="resetForm"
+            size="x-large"
+            style="color: #000"
+            variant="text"
             >Сбросить</v-btn
           >
           <v-btn
@@ -85,6 +118,10 @@ const passwordsMatch = (value) => {
 </template>
 
 <style lang="scss" scoped>
+.v-field--variant-solo,
+.v-field--variant-solo-filled {
+  box-shadow: none;
+}
 .v-card {
   padding: 40px 80px;
   display: flex;
