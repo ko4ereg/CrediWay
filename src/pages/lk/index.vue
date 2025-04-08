@@ -19,8 +19,8 @@ import { RouterView } from "vue-router";
         <div class="sidebar-title">Управление аккаунтом</div>
         <div class="sidebar-items">
           <div class="sidebar-item">
-            <router-link active-class="active" to="/lk/info"
-              >Личные данные</router-link
+            <RouterLink active-class="active" to="/lk/info"
+              >Личные данные</RouterLink
             >
           </div>
         </div>

@@ -154,15 +154,15 @@ const loading = ref(false);
         <div class="agrees">
           <div class="agree">
             <v-icon>mdi-check</v-icon>
-            <router-link
+            <RouterLink to="/"
               ><span>Согласие на получение СМС-оповещений</span>
-            </router-link>
+            </RouterLink>
           </div>
           <div class="agree">
             <v-icon>mdi-check</v-icon>
-            <router-link
+            <RouterLink to="/"
               ><span>Согласие на обработку персональных данных</span>
-            </router-link>
+            </RouterLink>
           </div>
         </div>
       </div>
