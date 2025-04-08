@@ -1,5 +1,5 @@
 <script setup>
-import { required } from "@/utils/validator";
+import { required, requiredCheck } from "@/utils/validator";
 import { ref } from "vue";
 import { useDisplay } from "vuetify";
 
@@ -15,9 +15,16 @@ const error = ref(false);
 const errorMessage = ref("");
 const submitSignUp = ref(false);
 const submitSms = ref(false);
-
+const notifications = ref(false);
+const agree = ref(false);
 const onSubmit = () => {
-  if (!phone.value || !password.value || !passwordRepeat.value) {
+  if (
+    !phone.value ||
+    !password.value ||
+    !passwordRepeat.value ||
+    !agree.value ||
+    !notifications.value
+  ) {
     error.value = true;
     errorMessage.value = "Заполните все поля";
     return;
@@ -34,6 +41,7 @@ const onSubmit = () => {
     return;
   }
   loading.value = true;
+
   submitSignUp.value = true;
   loading.value = false;
 };
@@ -51,6 +59,7 @@ const passwordsMatch = (value) => {
 };
 
 const passwordRepeatField = ref(null);
+
 const resetValidation = async () => {
   if (passwordRepeatField.value) {
     return passwordRepeatField.value.resetValidation();
@@ -70,7 +79,6 @@ const loading = ref(false);
         </div>
         <v-form
           validate-on="submit"
-          style="height: 420px"
           v-if="!submitSignUp"
           class="w-100"
           v-model="form"
@@ -120,6 +128,36 @@ const loading = ref(false);
               >
             </div>
           </div>
+          <div class="agrees">
+            <div class="agree">
+              <v-checkbox
+                validate-on="input"
+                hide-details
+                v-model="notifications"
+                :rules="[requiredCheck]"
+              >
+                <template v-slot:label>
+                  <RouterLink to="/"
+                    ><span>Согласие на получение СМС-оповещений</span>
+                  </RouterLink></template
+                >
+              </v-checkbox>
+            </div>
+            <div class="agree">
+              <v-checkbox
+                hide-details
+                validate-on="input"
+                v-model="agree"
+                :rules="[requiredCheck]"
+              >
+                <template v-slot:label>
+                  <RouterLink to="/"
+                    ><span>Согласие на обработку персональных данных</span>
+                  </RouterLink></template
+                >
+              </v-checkbox>
+            </div>
+          </div>
         </v-form>
         <v-form
           style="height: 420px"
@@ -160,20 +198,6 @@ const loading = ref(false);
             </div>
           </div>
         </v-form>
-        <div class="agrees">
-          <div class="agree">
-            <v-icon>mdi-check</v-icon>
-            <RouterLink to="/"
-              ><span>Согласие на получение СМС-оповещений</span>
-            </RouterLink>
-          </div>
-          <div class="agree">
-            <v-icon>mdi-check</v-icon>
-            <RouterLink to="/"
-              ><span>Согласие на обработку персональных данных</span>
-            </RouterLink>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -254,6 +278,7 @@ const loading = ref(false);
     gap: 16px;
     justify-content: flex-end;
     margin-top: 40px;
+    margin-bottom: 130px;
     .v-btn {
       text-transform: none;
 
@@ -283,11 +308,14 @@ const loading = ref(false);
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-    gap: 27px;
+
     .agree {
       display: flex;
       gap: 14px;
       align-items: center;
+      :deep(.v-checkbox .v-selection-control) {
+        min-height: auto !important;
+      }
       span {
         transition: 0.2s ease-out;
         color: #000;
@@ -334,9 +362,15 @@ const loading = ref(false);
 
     .buttons {
       margin-top: 10px;
+      margin-bottom: 30px;
     }
     .agrees {
       margin-top: 0px;
+      .agree {
+        span {
+          font-size: 0.8rem;
+        }
+      }
     }
   }
 }
