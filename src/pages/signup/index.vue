@@ -91,7 +91,7 @@ const loading = ref(false);
             validate-on="lazy submit"
             v-model="passwordRepeat"
             bg-color="transparent"
-            :rules="[passwordsMatch]"
+            :rules="[required, passwordsMatch]"
             placeholder="Повтор пароля"
             variant="underlined"
           ></v-text-field>

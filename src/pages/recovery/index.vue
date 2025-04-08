@@ -138,7 +138,7 @@ const loading = ref(false);
             variant="underlined"
           ></v-text-field>
           <v-text-field
-            :rules="[passwordsMatch]"
+            :rules="[required, passwordsMatch]"
             v-model="passwordRepeat"
             bg-color="transparent"
             placeholder="Повтор пароля"
@@ -178,7 +178,7 @@ const loading = ref(false);
   margin-top: 60px;
   margin-bottom: 100px;
   position: relative;
-  height: 60dvh;
+  height: 70dvh;
 }
 .sideimage {
   border-radius: 0px 4px 4px 0px;
@@ -249,7 +249,7 @@ const loading = ref(false);
 
 @media (max-width: 1023px) {
   .container {
-    height: 80dvh;
+    height: 100dvh;
   }
   .sideimage {
     border-radius: 0px 4px 4px 0px;
@@ -275,7 +275,7 @@ const loading = ref(false);
   .form {
     padding-bottom: 100px;
     width: 100%;
-
+    padding-top: 100px;
     .buttons {
       margin-top: 10px;
     }

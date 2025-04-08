@@ -62,7 +62,7 @@ const passwordsMatch = (value) => {
             validate-on="lazy submit"
             :v-model="repeatNewPassword"
             bg-color="#F5F5F5"
-            :rules="[passwordsMatch]"
+            :rules="[required, passwordsMatch]"
             placeholder="Повтор нового пароля"
             variant="text"
           ></v-text-field>
