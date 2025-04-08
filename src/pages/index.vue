@@ -42,7 +42,7 @@
   height: 100%;
 }
 .main-page {
-  height: 100%;
+  height: 100dvh;
   display: flex;
   .main-page_sidebar {
     padding: 40px 14px 0 0;
