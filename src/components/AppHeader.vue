@@ -73,13 +73,16 @@ const { width } = useDisplay();
     }
   }
 }
-@media (max-width: 393px) {
+@media (max-width: 375px) {
   .header {
     gap: 10px;
     padding: 0px 0 0px;
     .links {
       display: inline-flex;
       gap: 5px;
+      .link {
+        font-size: 0.6rem;
+      }
     }
   }
 }
