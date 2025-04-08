@@ -1,6 +1,6 @@
 <script setup></script>
 <template>
-  <div class="d-flex align-end" style="transform: rotate(-6deg)">
+  <div class="d-flex align-end">
     <span>CrediWay.online</span>
 
     <svg
