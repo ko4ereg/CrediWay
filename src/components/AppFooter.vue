@@ -40,22 +40,22 @@
           <div class="column-title">Организация</div>
           <div class="column-items">
             <div class="column-item">
-              <RouterLink to="/">
+              <RouterLink target="_blank" to="/">
                 <div class="link">Правила и условия</div></RouterLink
               >
             </div>
             <div class="column-item">
-              <RouterLink to="/">
+              <RouterLink target="_blank" to="/">
                 <div class="link">Политика конфиденциальности</div></RouterLink
               >
             </div>
             <div class="column-item">
-              <RouterLink to="/">
+              <RouterLink target="_blank" to="/">
                 <div class="link">Пользовательское соглашение</div></RouterLink
               >
             </div>
             <div class="column-item">
-              <RouterLink to="/"> <div class="link">О нас</div></RouterLink>
+              <RouterLink  to="/about"> <div class="link">О нас</div></RouterLink>
             </div>
           </div>
         </div>

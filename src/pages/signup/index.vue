@@ -137,7 +137,7 @@ const loading = ref(false);
                 :rules="[requiredCheck]"
               >
                 <template v-slot:label>
-                  <RouterLink to="/"
+                  <RouterLink target="_blank" to="/"
                     ><span>Согласие на получение СМС-оповещений</span>
                   </RouterLink></template
                 >
@@ -151,7 +151,7 @@ const loading = ref(false);
                 :rules="[requiredCheck]"
               >
                 <template v-slot:label>
-                  <RouterLink to="/"
+                  <RouterLink target="_blank" to="/"
                     ><span>Согласие на обработку персональных данных</span>
                   </RouterLink></template
                 >
