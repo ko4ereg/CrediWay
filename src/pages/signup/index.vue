@@ -15,6 +15,7 @@ const error = ref(false);
 const errorMessage = ref("");
 const submitSignUp = ref(false);
 const submitSms = ref(false);
+
 const onSubmit = () => {
   if (!phone.value || !password.value || !passwordRepeat.value) {
     error.value = true;
@@ -49,6 +50,10 @@ const passwordsMatch = (value) => {
   return !!value === password.value || "Пароли не совпадают";
 };
 
+const passwordRepeatField = ref(null);
+const resetValidation = async () => {
+  await passwordRepeatField.value.resetValidation();
+};
 const loading = ref(false);
 </script>
 
@@ -88,7 +93,8 @@ const loading = ref(false);
           ></v-text-field>
 
           <v-text-field
-            validate-on="lazy submit"
+            ref="passwordRepeatField"
+            @update:focused="resetValidation"
             v-model="passwordRepeat"
             bg-color="transparent"
             :rules="[required, passwordsMatch]"
@@ -173,7 +179,7 @@ const loading = ref(false);
     {{ errorMessage }}
 
     <template v-slot:actions>
-      <v-btn color="white" variant="text" @click="snackbar = false">
+      <v-btn color="white" variant="text" @click="error = false">
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </template>
