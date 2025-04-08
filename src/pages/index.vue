@@ -7,16 +7,16 @@
     <div class="main-page">
       <div class="main-page_sidebar">
         <div class="main-page_links">
-          <RouterLink> <div class="main-page_link">Контакты</div></RouterLink>
-          <RouterLink>
+          <RouterLink to="/"> <div class="main-page_link">Контакты</div></RouterLink>
+          <RouterLink to="/">
             <div class="main-page_link">Правила и условия</div></RouterLink
           >
-          <RouterLink>
+          <RouterLink to="/">
             <div class="main-page_link">
               Политика конфиденциальности
             </div></RouterLink
           >
-          <RouterLink>
+          <RouterLink to="/"> 
             <div class="main-page_link">
               Пользовательское соглашение
             </div></RouterLink
